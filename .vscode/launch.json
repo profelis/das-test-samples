@@ -11,7 +11,7 @@
             "program": "${config:dascript.compiler} ${workspaceFolder}/dastest/dastest.das -- --test ${file} --uri-paths --color",
             "cwd": "${workspaceFolder}",
             "connectTimeout": 3,
-            "console": "externalTerminal",
+            "console": "internalTerminal",
         },
         {
             "type": "dascript",
@@ -20,7 +20,7 @@
             "program": "${config:dascript.compiler} ${workspaceFolder}/dastest/dastest.das -- --test ${workspaceFolder}/tests --uri-paths --color",
             "cwd": "${workspaceFolder}",
             "connectTimeout": 3,
-            "console": "externalTerminal",
+            "console": "internalTerminal",
         },
         {
             "type": "dascript",
