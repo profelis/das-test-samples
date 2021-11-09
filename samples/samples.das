@@ -19,7 +19,7 @@ def sum_test(t: T?)
 [test(name="sub tests")]
 def sub(t: T?)
     // warmup
-    t->run("sub test 1") <| @@(tt:T?)
+    t->run("sub test 1") <| @(tt:T?)
         tt->log("sub test message")
     // tear down
 
