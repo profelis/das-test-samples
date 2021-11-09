@@ -7,18 +7,11 @@ require debugapi
 [init]
 def setup()
     var args <- get_command_line_arguments()
-    log::useTtyColors = args |> has_value("--color")
-
-def file_ctx()
-    var ctx <- [[SuiteFileCtx uriPaths=true, stackOnRecover=false]]
-    unsafe
-        ctx.context = addr(this_context())
-    return <- ctx
-
+    log::init_log(args)
 
 [test]
 def test_deref(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("deref null", ctx) <| @@(tt: T?)
         var i: int?
         *i = 0
@@ -28,7 +21,7 @@ def test_deref(t: T?)
 
 [test]
 def test_division_by_zero(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("division by zero", ctx) <| @@(tt: T?)
         var div = 0
         tt->log("{1 / div}")
@@ -38,7 +31,7 @@ def test_division_by_zero(t: T?)
 
 [test]
 def success_test(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("success test", ctx) <| @@(tt: T?)
         tt->log("success")
 
@@ -47,7 +40,7 @@ def success_test(t: T?)
 
 [test]
 def skipped_test(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("skipped test", ctx) <| @@(tt: T?)
         tt->skip("skip now")
         tt->error("this error should be ignored")
@@ -57,7 +50,7 @@ def skipped_test(t: T?)
 
 [test]
 def failed_test(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("failed test", ctx) <| @@(tt: T?)
         tt->fail()
 
@@ -66,7 +59,7 @@ def failed_test(t: T?)
 
 [test]
 def failed_now_test(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("fail now test", ctx) <| @@(tt: T?)
         tt->failNow()
         panic("this panic should be skipped")
@@ -76,7 +69,7 @@ def failed_now_test(t: T?)
 
 [test]
 def strict_equal_test(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
     let res = test_func("strict equal test", ctx) <| @@(tt: T?)
         strictEqual(tt, 1, 2)
         tt->run("unreaceable test") <| @@(tt: T?)
@@ -87,7 +80,7 @@ def strict_equal_test(t: T?)
 
 [test]
 def mixed_tests(t: T?)
-    var ctx <- file_ctx()
+    var ctx <- createSuiteFileCtx()
 
     // 1 error
     var res = test_func("exception test", ctx) <| @@(tt: T?)
