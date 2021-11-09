@@ -19,7 +19,7 @@ def file_ctx()
 [test]
 def test_deref(t: T?)
     var ctx <- file_ctx()
-    let res = test_func("deref null", ctx) <| @@(tt: T?)
+    let res = test_func("expect deref null", ctx) <| @@(tt: T?)
         var i: int?
         *i = 0
 
@@ -29,7 +29,7 @@ def test_deref(t: T?)
 [test]
 def test_division_by_zero(t: T?)
     var ctx <- file_ctx()
-    let res = test_func("division by zero", ctx) <| @@(tt: T?)
+    let res = test_func("expect division by zero", ctx) <| @@(tt: T?)
         var div = 0
         tt->log("{1 / div}")
 
@@ -79,7 +79,7 @@ def mixed_tests(t: T?)
     var ctx <- file_ctx()
 
     // 1 error
-    var res = test_func("exception test", ctx) <| @@(tt: T?)
+    var res = test_func("expect exception", ctx) <| @@(tt: T?)
         var i: int?
         *i = 0
 
@@ -88,7 +88,7 @@ def mixed_tests(t: T?)
         pass
 
     // 1 failed now
-    res += test_func("fail now test", ctx) <| @@(tt: T?)
+    res += test_func("expect fail now", ctx) <| @@(tt: T?)
         tt->failNow()
         panic("this panic should be skipped")
 
@@ -98,7 +98,7 @@ def mixed_tests(t: T?)
         panic("this panic should be skipped")
 
     // 1 failed
-    res += test_func("fail now test", ctx) <| @@(tt: T?)
+    res += test_func("expect fail", ctx) <| @@(tt: T?)
         tt->fail()
 
     // 1 passed
