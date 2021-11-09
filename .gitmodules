@@ -1,0 +1,3 @@
+[submodule "dastest"]
+	path = dastest
+	url = git@github.com:profelis/das-test.git
