@@ -77,7 +77,7 @@ def strict_equal_test(t: T?)
     var ctx <- file_ctx()
     let res = test_func("strict equal test", ctx) <| @@(tt: T?)
         strictEqual(tt, 1, 2)
-        tt->run("unreaceable test") <| @(tt: T?)
+        tt |> run("unreaceable test") <| @(tt: T?)
             pass
 
     equal(t, res, [[SuiteResult total=1, failed=1]])

@@ -19,7 +19,7 @@ def test_filter(t: T?)
     var ctx <- createSuiteCtx()
     for test in map
         unsafe
-            t->run("filter {test._0}") <| @(tt: T?)
+            t |> run("filter {test._0}") <| @(tt: T?)
                 ctx.testNames <- test._0
                 let res = test_file(path, ctx)
                 equal(tt, res, [[SuiteResult total=test._1, passed=test._1]])

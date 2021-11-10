@@ -19,8 +19,10 @@ def sum_test(t: T?)
 [test(name="sub tests")]
 def sub(t: T?)
     // warmup
-    t->run("sub test 1") <| @(tt:T?)
-        tt->log("sub test message")
+    t |> run("sub lambda") <| @(tt:T?)
+        tt->log("sub lambda message")
+    t |> run("sub func") <| @@(tt:T?)
+        tt->log("sub func message")
     // tear down
 
 
@@ -37,4 +39,3 @@ def t1(t: testing::T?)
     equal(t, "{2}", "2")
 
     t->log("test {t.name} was {t.failed ? "failed" : "success"}")
-
