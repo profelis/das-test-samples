@@ -24,6 +24,13 @@
         },
         {
             "type": "dascript",
+            "request": "launch",
+            "name": "daScript: Launch",
+            "program": "${config:dascript.compiler} ${file}",
+            "cwd": "${fileDirname}"
+        },
+        {
+            "type": "dascript",
             "request": "attach",
             "name": "daScript: attach",
             "port": 10000
