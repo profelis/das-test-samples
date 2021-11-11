@@ -7,6 +7,7 @@ require debugapi
 def file_ctx()
     var res <- createSuiteFileCtx()
     res.stackOnRecover = false
+    res.expectFailure = true
     return <- res
 
 [init]
