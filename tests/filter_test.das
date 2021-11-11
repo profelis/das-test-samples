@@ -1,5 +1,6 @@
 require fio
 require rtti
+require daslib/strings_boost
 require dastest/testing_boost
 require dastest/suite
 require dastest/fs
@@ -17,9 +18,11 @@ def test_filter(t: T?)
     }]
 
     var ctx <- createSuiteCtx()
+    var fileCtx <- SuiteFileCtx(ctx)
+    fileCtx.indenting = "\t\t"
     for test in map
         unsafe
-            t |> run("filter {test._0}") <| @(tt: T?)
+            t |> run("filter [ \"{join(test._0, "\", \"")}\" ]") <| @(tt: T?)
                 ctx.testNames <- test._0
-                let res = test_file(path, ctx)
+                let res = test_file(path, ctx, fileCtx)
                 equal(tt, res, [[SuiteResult total=test._1, passed=test._1]])

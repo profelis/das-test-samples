@@ -4,6 +4,10 @@ require dastest/suite
 require dastest/log
 require debugapi
 
+
+[init] def setup { log::init_log(); }
+
+
 def file_ctx()
     var res <- createSuiteFileCtx()
     res.stackOnRecover = false
@@ -11,10 +15,6 @@ def file_ctx()
     res.indenting = "\t"
     return <- res
 
-[init]
-def setup()
-    var args <- get_command_line_arguments()
-    log::init_log(args)
 
 [test]
 def test_deref(t: T?)
