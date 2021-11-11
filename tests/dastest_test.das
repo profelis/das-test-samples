@@ -8,6 +8,7 @@ def file_ctx()
     var res <- createSuiteFileCtx()
     res.stackOnRecover = false
     res.expectFailure = true
+    res.indenting = "\t"
     return <- res
 
 [init]
