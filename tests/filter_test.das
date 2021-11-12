@@ -17,12 +17,13 @@ def test_filter(t: T?)
         [[auto [{auto[] "ca"}], 1]]
     }]
 
-    var ctx <- createSuiteCtx()
-    var fileCtx <- SuiteFileCtx(ctx)
-    fileCtx.indenting = "\t\t"
     for test in map
-        unsafe
-            t |> run("filter [ \"{join(test._0, "\", \"")}\" ]") <| @(tt: T?)
-                ctx.testNames <- test._0
-                let res = test_file(path, ctx, fileCtx)
-                equal(tt, res, [[SuiteResult total=test._1, passed=test._1]])
+        t |> run("filter [ \"{join(test._0, "\", \"")}\" ]") <| @[[:=test]](tt: T?)
+            var ctx <- createSuiteCtx()
+            var fileCtx <- SuiteFileCtx(ctx)
+            fileCtx.indenting = "\t\t"
+            ctx.testNames <- test._0
+            let res = test_file(path, ctx, fileCtx)
+            equal(tt, res, [[SuiteResult total=test._1, passed=test._1]])
+            delete ctx
+            delete fileCtx

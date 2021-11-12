@@ -9,7 +9,9 @@ require debugapi
 
 
 def file_ctx()
-    var res <- createSuiteFileCtx()
+    var ctx <- createSuiteCtx()
+    var res <- SuiteFileCtx(ctx)
+    delete ctx
     res.stackOnRecover = false
     res.indenting = "\t"
     return <- res
