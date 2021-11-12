@@ -2,7 +2,6 @@
 require dastest/testing_boost
 require dastest/suite
 require dastest/log
-require debugapi
 
 
 [init] def setup { log::init_log(); }
