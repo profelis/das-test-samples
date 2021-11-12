@@ -91,6 +91,30 @@ def strict_equal_test(t: T?)
 
 
 [test]
+def panic_test(t: T?)
+    var ctx <- file_ctx()
+    ctx.expectFailure = true
+    let res = test_func("expect panic", ctx) <| @@(tt: T?)
+        panic("panic")
+
+    equal(t, res, [[SuiteResult total=1, errors=1]])
+
+
+[test]
+def recover_test(t: T?)
+    var ctx <- file_ctx()
+    let res = test_func("catch panic", ctx) <| @@(tt: T?)
+        var recovered = false
+        try
+            panic("panic")
+        recover
+            recovered = true
+        tt |> success(recovered)
+
+    equal(t, res, [[SuiteResult total=1, passed=1]])
+
+
+[test]
 def mixed_tests(t: T?)
     var ctx <- file_ctx()
 
