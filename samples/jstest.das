@@ -19,8 +19,8 @@ def arrays(t: T?)
     let arr1 = JV(1., 2.)
     let arr2 = JV([{int[] 1; 2}])
 
-    let raw1 & = arr1 as _array
-    let raw2 & = arr2 as _array
+    let raw1 & = unsafe(arr1 as _array)
+    let raw2 & = unsafe(arr2 as _array)
     equal(t, length(raw1), length(raw2))
     for i, j in raw1, raw2
         equal(t, i as _number, j as _number)
@@ -46,7 +46,7 @@ def structs(t: T?)
     let foo = JV(data)
     success(t, foo is _object)
     equal(t, length(foo as _object), 2)
-    let fooJv & = foo as _object
+    let fooJv & = unsafe(foo as _object)
     success(t, fooJv |> key_exists("b"))
     success(t, fooJv |> key_exists("ia"))
     fooJv |> find("b") <| $(bVal)
@@ -75,7 +75,7 @@ def classes(t: T?)
     var jv = JV(*data)
     success(t, jv is _object)
     equal(t, length(jv as _object), 4)
-    var jvJv & = jv as _object
+    var jvJv & = unsafe(jv as _object)
     success(t, jvJv |> key_exists("a"))
     success(t, jvJv |> key_exists("b"))
     success(t, jvJv |> key_exists("c"))
