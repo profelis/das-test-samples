@@ -20,7 +20,7 @@ def test_filter(t: T?)
     for test in map
         t |> run("filter [ \"{join(test._0, "\", \"")}\" ]") <| @[[:=test]](tt: T?)
             var ctx <- createSuiteCtx()
-            var fileCtx <- SuiteFileCtx(ctx)
+            var fileCtx <- FileCtx(ctx)
             fileCtx.indenting = "\t\t"
             ctx.testNames <- test._0
             let res = test_file(path, ctx, fileCtx)

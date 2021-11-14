@@ -9,7 +9,7 @@ require dastest/log
 
 def file_ctx()
     var ctx <- createSuiteCtx()
-    var res <- SuiteFileCtx(ctx)
+    var res <- FileCtx(ctx)
     delete ctx
     res.stackOnRecover = false
     res.indenting = "\t"
@@ -152,7 +152,7 @@ def mixed_tests(t: T?)
     equal(t, res, [[SuiteResult total=6, errors=1, failed=2, skipped=1, passed=2]])
 
 
-def expect_failure(var ctx: SuiteFileCtx; blk)
+def expect_failure(var ctx: FileCtx; blk)
     ctx.expectFailure = true
     blk |> invoke()
     ctx.expectFailure = false
