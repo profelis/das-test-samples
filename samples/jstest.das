@@ -67,7 +67,6 @@ class SomeData
 
 [test(name="json classes")]
 def classes(t: T?)
-    t->skip("disabled, while js(void?) exists")
     var data = new SomeData()
     var foo <- Foo()
     unsafe
