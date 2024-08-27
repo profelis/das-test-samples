@@ -49,12 +49,12 @@ def structs(t: T?)
     let fooJv & = unsafe(foo as _object)
     success(t, fooJv |> key_exists("b"))
     success(t, fooJv |> key_exists("ia"))
-    fooJv |> find("b") <| $(bVal)
-        equal(t, *bVal as _bool, true)
-    fooJv |> find("ia") <| $(bVal)
-        success(t, *bVal is _array)
-        equal(t, length(*bVal as _array), 4)
-        for i, j in data.ia, *bVal as _array
+    fooJv |> get("b") <| $(bVal)
+        equal(t, bVal as _bool, true)
+    fooJv |> get("ia") <| $(bVal)
+        success(t, bVal is _array)
+        equal(t, length(bVal as _array), 4)
+        for i, j in data.ia, bVal as _array
             equal(t, double(i), j as _number)
 
 
